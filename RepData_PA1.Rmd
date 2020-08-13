@@ -63,7 +63,9 @@ The data loaded is further processed to remove the missing values. The data is s
         tail(actDataComplete, 5)
 ```
 ## What is mean total number of steps taken per day?
-
+```{r total steps per day, echo=TRUE}
+        totalSteps <- tapply(actDataComplete$steps, actDataComplete$date, sum)
+```
 
 
 ## What is the average daily activity pattern?

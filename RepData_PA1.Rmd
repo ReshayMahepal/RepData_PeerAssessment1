@@ -78,7 +78,7 @@ The code below illustrates the method used to compute the total steps daily. The
 
 The histogram illustrating the "Total number of steps taken each day" is generated in the *base* plotting system.
 
-```{r histogram: total steps per day, echo=TRUE, fig.height= 5, fig.width= 5, fig.align= 'center'}
+```{r histogram total steps per day, echo=TRUE, fig.height= 5, fig.width= 5, fig.align= 'center'}
 
         hist(totalSteps$dailySteps, main = "Total number of steps taken each day", xlab = "Total Steps per day", col = "red")
 ```

@@ -179,7 +179,7 @@ The histogram illustrating the "Total number of steps taken each day" is generat
         hist(totalSteps$dailySteps, main = "Total number of steps taken each day", xlab = "Total Steps per day", col = "red")
 ```
 
-<img src="RepData_PA1_files/figure-html/histogram: total steps per day-1.png" style="display: block; margin: auto;" />
+<img src="RepData_PA1_files/figure-html/histogram total steps per day-1.png" style="display: block; margin: auto;" />
 
 The mean and median are found in the summary below:
 
@@ -191,7 +191,7 @@ The mean and median are found in the summary below:
 ```
 
 <!-- html table generated in R 3.6.3 by xtable 1.8-4 package -->
-<!-- Sat Aug 15 00:56:35 2020 -->
+<!-- Sat Aug 15 01:10:53 2020 -->
 <table border=1>
 <tr> <th>  </th> <th> Mean </th> <th> Median </th>  </tr>
   <tr> <td align="right"> 1 </td> <td align="right"> 10766 </td> <td align="right"> 10765 </td> </tr>
@@ -466,7 +466,7 @@ The mean and median of the imputed data set("comDatSteps") is calculated as foll
 ```
 
 <!-- html table generated in R 3.6.3 by xtable 1.8-4 package -->
-<!-- Sat Aug 15 00:56:43 2020 -->
+<!-- Sat Aug 15 01:11:03 2020 -->
 <table border=1>
 <tr> <th>  </th> <th> Mean </th> <th> Median </th>  </tr>
   <tr> <td align="right"> 1 </td> <td align="right"> 10766 </td> <td align="right"> 10766 </td> </tr>

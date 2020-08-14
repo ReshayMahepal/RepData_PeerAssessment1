@@ -9,6 +9,8 @@ knitr::opts_chunk$set(echo = TRUE)
 setwd("C:/Users/Shahil Sunder/Desktop/Reshay_Project/coursera/ProgrammingAssignment2/RepData_PeerAssessment 1/RepData_PeerAssessment1")
 library(tidyr)
 library(dplyr)
+library(ggplot2)
+library(xtable)
 ```
 ## Introduction
 
@@ -44,7 +46,7 @@ The dataset is stored in a comma-separated-value (CSV) file and there are a tota
 The csv file containing the activity data is loaded into a data frame called actData using the code below.The structure of the data, dimensions as well as the first and last 10 rows are viewed
 
 ```{r activity data, echo=TRUE}
-        actData <- read.csv("activity.csv", header = TRUE)
+        actData <- data.frame(read.csv("activity.csv", header = TRUE))
         str(actData)
         dim(actData)
         head(actData, 5)
@@ -56,18 +58,40 @@ The csv file containing the activity data is loaded into a data frame called act
 The data loaded is further processed to remove the missing values. The data is store in a data frame named actDataComplete.
 
 ```{r activity data complete cases, echo=TRUE}
-        actDataComplete <- actData[complete.cases(actData),]
+        actDataComplete <- data.frame(actData[complete.cases(actData),])
         str(actDataComplete)
         dim(actDataComplete)
         head(actDataComplete, 5)
         tail(actDataComplete, 5)
 ```
+
 ## What is mean total number of steps taken per day?
+
+The total number of steps take per day is determined using the tapply method, summing the steps of the "actDataComplete" data, as a factor of the date. The complete cases, are only considered.
+
 ```{r total steps per day, echo=TRUE}
-        totalSteps <- tapply(actDataComplete$steps, actDataComplete$date, sum)
+        totalSteps <- group_by(actDataComplete, date)
+        totalSteps <- summarise(totalSteps, dailySteps = sum(steps))
+        head(totalSteps, 5)
+        mean(totalSteps$dailySteps)
 ```
 
+The histogram illustrating the "Total number of steps taken each day" is generated in the base plotting system.
 
+```{r histogram: total steps per day, echo=TRUE, fig.height=7, fig.width= 7, fig.align= 'center'}
+
+        hist(totalSteps$dailySteps, main = "Total number of steps taken each day", xlab = "Total Steps per day")
+```
+
+The mean and median are found in the summary below:
+
+```{r xtable, results='asis'}
+      sumTbl <- data.frame(Mean=mean(totalSteps$dailySteps), Median = median(totalSteps$dailySteps), stringsAsFactors=FALSE) 
+      sumTbl <- xtable(sumTbl, digits = c(0,0,0))
+      print(sumTbl, type ="html")
+      
+  
+```
 ## What is the average daily activity pattern?
 
 

@@ -45,7 +45,7 @@ The dataset is stored in a comma-separated-value (CSV) file and there are a tota
 
 ## Loading and preprocessing the data
 
-The csv file containing the activity data is loaded into a data frame called actData using the code below.The structure of the data, dimensions as well as the first and last 10 rows are viewed
+The csv file containing the activity data is loaded into a data frame called "actData" using the code below.The structure of the data, dimensions as well as the first and last 5 rows are viewed,
 
 ```{r activity data, echo=TRUE}
         actData <- data.frame(read.csv("activity.csv", header = TRUE))
@@ -55,7 +55,7 @@ The csv file containing the activity data is loaded into a data frame called act
         tail(actData, 5)
 ```
 
-The data loaded is further processed to remove the missing values. The data is stored in a data frame named actDataComplete.
+The data loaded is further processed to remove the missing values. The data is stored in a data frame named "actDataComplete". The structure of the data, dimensions as well as the first and last 5 rows are viewed.
 
 ```{r activity data complete cases, echo=TRUE}
         actDataComplete <- data.frame(actData[complete.cases(actData),])
@@ -73,6 +73,7 @@ The code below illustrates the method used to compute the total steps daily. The
         totalSteps <- group_by(actDataComplete, date)
         totalSteps <- summarise(totalSteps, dailySteps = sum(steps))
         head(totalSteps, 5)
+        tail(totalSteps, 5)
         mean(totalSteps$dailySteps)
 ```
 
@@ -152,18 +153,17 @@ The method used to generate the "totalSteps" data set is employed to create the 
 
 The mean and median of the imputed data set("comDatSteps") is calculated as follows:
 
-
 ```{r xtable for imputed data set, results='asis'}
       meanMedTbl <- data.frame(Mean=mean(comDatSteps$dailySteps), Median = median(comDatSteps$dailySteps), stringsAsFactors=FALSE) 
       meanMedTbl <- xtable(meanMedTbl, digits = c(0,0,0),)
       print(meanMedTbl, type ="html")
 ```
 
-As per the table above, we see that the mean value **remains the same** as per that determined when considering only the complete cases of the original data set. The median on the other hand has **increased by 1 from 10765 to 10766**. Similarly comparing the 2 histograms plotted, it is evident that imputing the missing data using the method as described above had a negilible impact of the estimates of the daily total number of steps.
+As per the table above, we see that the mean value **remains the same** as per that determined when considering only the **complete cases of the original data set**. The median on the other hand has **increased by 1 from 10765 to 10766**. Similarly comparing the 2 histograms plotted, it is evident that imputing the missing data using the method as described above had a negilible impact of the estimates of the daily total number of steps.
 
 ## Are there differences in activity patterns between weekdays and weekends?
 
-The *weekday()* function was used to determine the weekday or "dayName", and the variable added to the "completeData" data set. using the ifelse function, the "dayName" could be classified as weekend or weekday. However, in order to use this method, the date variable had to be converted from the factor class to the date class  
+The *weekday()* function was used to determine the weekday or "dayName", and the variable added to the "completeData" data set. using the ifelse function, the "dayName" is classified as weekend or weekday and store in a variable named "dayDes". However, in order to use this method, the date variable had to be converted from the factor class to the date class  
 
 ```{r weekend and week day variable, echo=TRUE}
         completeData <- data.frame(completeData)

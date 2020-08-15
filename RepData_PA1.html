@@ -390,7 +390,7 @@ summary {
 </div>
 <div id="loading-and-preprocessing-the-data" class="section level2">
 <h2>Loading and preprocessing the data</h2>
-<p>The csv file containing the activity data is loaded into a data frame called actData using the code below.The structure of the data, dimensions as well as the first and last 10 rows are viewed</p>
+<p>The csv file containing the activity data is loaded into a data frame called “actData” using the code below.The structure of the data, dimensions as well as the first and last 5 rows are viewed,</p>
 <pre class="r"><code>        actData &lt;- data.frame(read.csv(&quot;activity.csv&quot;, header = TRUE))
         str(actData)</code></pre>
 <pre><code>## &#39;data.frame&#39;:    17568 obs. of  3 variables:
@@ -413,7 +413,7 @@ summary {
 ## 17566    NA 2012-11-30     2345
 ## 17567    NA 2012-11-30     2350
 ## 17568    NA 2012-11-30     2355</code></pre>
-<p>The data loaded is further processed to remove the missing values. The data is stored in a data frame named actDataComplete.</p>
+<p>The data loaded is further processed to remove the missing values. The data is stored in a data frame named “actDataComplete”. The structure of the data, dimensions as well as the first and last 5 rows are viewed.</p>
 <pre class="r"><code>        actDataComplete &lt;- data.frame(actData[complete.cases(actData),])
         str(actDataComplete)</code></pre>
 <pre><code>## &#39;data.frame&#39;:    15264 obs. of  3 variables:
@@ -452,6 +452,15 @@ summary {
 ## 3 2012-10-04      12116
 ## 4 2012-10-05      13294
 ## 5 2012-10-06      15420</code></pre>
+<pre class="r"><code>        tail(totalSteps, 5)</code></pre>
+<pre><code>## # A tibble: 5 x 2
+##   date       dailySteps
+##   &lt;fct&gt;           &lt;int&gt;
+## 1 2012-11-25      11834
+## 2 2012-11-26      11162
+## 3 2012-11-27      13646
+## 4 2012-11-28      10183
+## 5 2012-11-29       7047</code></pre>
 <pre class="r"><code>        mean(totalSteps$dailySteps)</code></pre>
 <pre><code>## [1] 10766.19</code></pre>
 <p>The histogram illustrating the “Total number of steps taken each day” is generated in the <em>base</em> plotting system.</p>
@@ -462,7 +471,7 @@ summary {
       sumTbl &lt;- xtable(sumTbl, digits = c(0,0,0))
       print(sumTbl, type =&quot;html&quot;)</code></pre>
 <!-- html table generated in R 3.6.3 by xtable 1.8-4 package -->
-<!-- Sat Aug 15 01:10:53 2020 -->
+<!-- Sat Aug 15 21:00:35 2020 -->
 <table border="1">
 <tr>
 <th>
@@ -645,7 +654,7 @@ Median
       meanMedTbl &lt;- xtable(meanMedTbl, digits = c(0,0,0),)
       print(meanMedTbl, type =&quot;html&quot;)</code></pre>
 <!-- html table generated in R 3.6.3 by xtable 1.8-4 package -->
-<!-- Sat Aug 15 01:11:03 2020 -->
+<!-- Sat Aug 15 21:00:44 2020 -->
 <table border="1">
 <tr>
 <th>
@@ -669,11 +678,11 @@ Median
 </td>
 </tr>
 </table>
-<p>As per the table above, we see that the mean value <strong>remains the same</strong> as per that determined when considering only the complete cases of the original data set. The median on the other hand has <strong>increased by 1 from 10765 to 10766</strong>. Similarly comparing the 2 histograms plotted, it is evident that imputing the missing data using the method as described above had a negilible impact of the estimates of the daily total number of steps.</p>
+<p>As per the table above, we see that the mean value <strong>remains the same</strong> as per that determined when considering only the <strong>complete cases of the original data set</strong>. The median on the other hand has <strong>increased by 1 from 10765 to 10766</strong>. Similarly comparing the 2 histograms plotted, it is evident that imputing the missing data using the method as described above had a negilible impact of the estimates of the daily total number of steps.</p>
 </div>
 <div id="are-there-differences-in-activity-patterns-between-weekdays-and-weekends" class="section level2">
 <h2>Are there differences in activity patterns between weekdays and weekends?</h2>
-<p>The <em>weekday()</em> function was used to determine the weekday or “dayName”, and the variable added to the “completeData” data set. using the ifelse function, the “dayName” could be classified as weekend or weekday. However, in order to use this method, the date variable had to be converted from the factor class to the date class</p>
+<p>The <em>weekday()</em> function was used to determine the weekday or “dayName”, and the variable added to the “completeData” data set. using the ifelse function, the “dayName” is classified as weekend or weekday and store in a variable named “dayDes”. However, in order to use this method, the date variable had to be converted from the factor class to the date class</p>
 <pre class="r"><code>        completeData &lt;- data.frame(completeData)
         completeData$date &lt;- as.Date(completeData$date, format = &quot;%Y-%m-%d&quot;)
         completeData$dayName &lt;- weekdays(completeData$date)

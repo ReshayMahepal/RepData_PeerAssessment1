@@ -37,7 +37,7 @@ The dataset is stored in a comma-separated-value (CSV) file and there are a tota
 
 ## Loading and preprocessing the data
 
-The csv file containing the activity data is loaded into a data frame called actData using the code below.The structure of the data, dimensions as well as the first and last 10 rows are viewed
+The csv file containing the activity data is loaded into a data frame called "actData" using the code below.The structure of the data, dimensions as well as the first and last 5 rows are viewed,
 
 
 ```r
@@ -86,7 +86,7 @@ The csv file containing the activity data is loaded into a data frame called act
 ## 17568    NA 2012-11-30     2355
 ```
 
-The data loaded is further processed to remove the missing values. The data is stored in a data frame named actDataComplete.
+The data loaded is further processed to remove the missing values. The data is stored in a data frame named "actDataComplete". The structure of the data, dimensions as well as the first and last 5 rows are viewed.
 
 
 ```r
@@ -165,6 +165,21 @@ The code below illustrates the method used to compute the total steps daily. The
 ```
 
 ```r
+        tail(totalSteps, 5)
+```
+
+```
+## # A tibble: 5 x 2
+##   date       dailySteps
+##   <fct>           <int>
+## 1 2012-11-25      11834
+## 2 2012-11-26      11162
+## 3 2012-11-27      13646
+## 4 2012-11-28      10183
+## 5 2012-11-29       7047
+```
+
+```r
         mean(totalSteps$dailySteps)
 ```
 
@@ -191,7 +206,7 @@ The mean and median are found in the summary below:
 ```
 
 <!-- html table generated in R 3.6.3 by xtable 1.8-4 package -->
-<!-- Sat Aug 15 01:10:53 2020 -->
+<!-- Sat Aug 15 21:00:35 2020 -->
 <table border=1>
 <tr> <th>  </th> <th> Mean </th> <th> Median </th>  </tr>
   <tr> <td align="right"> 1 </td> <td align="right"> 10766 </td> <td align="right"> 10765 </td> </tr>
@@ -458,7 +473,6 @@ The method used to generate the "totalSteps" data set is employed to create the 
 The mean and median of the imputed data set("comDatSteps") is calculated as follows:
 
 
-
 ```r
       meanMedTbl <- data.frame(Mean=mean(comDatSteps$dailySteps), Median = median(comDatSteps$dailySteps), stringsAsFactors=FALSE) 
       meanMedTbl <- xtable(meanMedTbl, digits = c(0,0,0),)
@@ -466,17 +480,17 @@ The mean and median of the imputed data set("comDatSteps") is calculated as foll
 ```
 
 <!-- html table generated in R 3.6.3 by xtable 1.8-4 package -->
-<!-- Sat Aug 15 01:11:03 2020 -->
+<!-- Sat Aug 15 21:00:44 2020 -->
 <table border=1>
 <tr> <th>  </th> <th> Mean </th> <th> Median </th>  </tr>
   <tr> <td align="right"> 1 </td> <td align="right"> 10766 </td> <td align="right"> 10766 </td> </tr>
    </table>
 
-As per the table above, we see that the mean value **remains the same** as per that determined when considering only the complete cases of the original data set. The median on the other hand has **increased by 1 from 10765 to 10766**. Similarly comparing the 2 histograms plotted, it is evident that imputing the missing data using the method as described above had a negilible impact of the estimates of the daily total number of steps.
+As per the table above, we see that the mean value **remains the same** as per that determined when considering only the **complete cases of the original data set**. The median on the other hand has **increased by 1 from 10765 to 10766**. Similarly comparing the 2 histograms plotted, it is evident that imputing the missing data using the method as described above had a negilible impact of the estimates of the daily total number of steps.
 
 ## Are there differences in activity patterns between weekdays and weekends?
 
-The *weekday()* function was used to determine the weekday or "dayName", and the variable added to the "completeData" data set. using the ifelse function, the "dayName" could be classified as weekend or weekday. However, in order to use this method, the date variable had to be converted from the factor class to the date class  
+The *weekday()* function was used to determine the weekday or "dayName", and the variable added to the "completeData" data set. using the ifelse function, the "dayName" is classified as weekend or weekday and store in a variable named "dayDes". However, in order to use this method, the date variable had to be converted from the factor class to the date class  
 
 
 ```r
